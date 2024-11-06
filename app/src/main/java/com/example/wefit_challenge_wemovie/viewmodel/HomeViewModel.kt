@@ -1,5 +1,6 @@
 package com.example.wefit_challenge_wemovie.viewmodel
 
+
 class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies
