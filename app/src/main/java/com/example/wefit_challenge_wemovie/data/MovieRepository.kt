@@ -1,5 +1,6 @@
-package com.example.wefit_challenge_wemovie.models
+package com.example.wefit_challenge_wemovie.data
 
+import com.example.wefit_challenge_wemovie.models.Movie
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
