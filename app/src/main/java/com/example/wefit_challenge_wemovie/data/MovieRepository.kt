@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MovieRepository {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://wefit-movies.vercel.app/")
+        .baseUrl("https://wefit-movies.vercel.app/api/movies")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -16,3 +16,4 @@ class MovieRepository {
         return service.getMovies()
     }
 }
+

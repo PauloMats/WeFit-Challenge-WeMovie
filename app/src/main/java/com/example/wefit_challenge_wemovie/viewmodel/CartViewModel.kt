@@ -6,27 +6,30 @@ import androidx.lifecycle.ViewModel
 import com.example.wefit_challenge_wemovie.models.Movie
 
 class CartViewModel : ViewModel() {
-    private val _cartItems = MutableLiveData<List<Movie>?>()
-    val cartItems: MutableLiveData<List<Movie>?> get() = _cartItems
+    private val _cartItems = MutableLiveData<MutableList<Movie>>(mutableListOf())
+    val cartItems: MutableLiveData<MutableList<Movie>> get() = _cartItems
 
     private val _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double> get() = _totalPrice
 
-    fun addItem(movie: Movie) {
-        val updatedCart = _cartItems.value?.toMutableList() ?: mutableListOf()
-        updatedCart.add(movie)
-        _cartItems.value = updatedCart
-        calculateTotal()
+    init {
+        calculateTotalPrice()
     }
 
-    fun removeItem(movie: Movie) {
-        val updatedCart = _cartItems.value?.toMutableList()
-        updatedCart?.remove(movie)
-        _cartItems.value = updatedCart
-        calculateTotal()
+    // Adiciona um filme ao carrinho
+    fun addToCart(movie: Movie) {
+        _cartItems.value?.add(movie)
+        calculateTotalPrice()
     }
 
-    private fun calculateTotal() {
+    // Remove um filme do carrinho
+    fun removeFromCart(movie: Movie) {
+        _cartItems.value?.remove(movie)
+        calculateTotalPrice()
+    }
+
+    // Calcula o valor total do carrinho
+    private fun calculateTotalPrice() {
         _totalPrice.value = _cartItems.value?.sumOf { it.price } ?: 0.0
     }
 }
