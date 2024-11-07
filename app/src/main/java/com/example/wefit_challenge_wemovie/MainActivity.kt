@@ -3,12 +3,15 @@ package com.example.wefit_challenge_wemovie
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         // Navegar para LoadingActivity após 2 segundos
         GlobalScope.launch {

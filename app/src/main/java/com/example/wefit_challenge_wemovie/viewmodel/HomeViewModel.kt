@@ -1,5 +1,6 @@
 package com.example.wefit_challenge_wemovie.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.wefit_challenge_wemovie.data.MovieRepository
 import com.example.wefit_challenge_wemovie.models.Movie
@@ -24,6 +25,7 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
                 _movies.value = (movieList)
             } catch (e: Exception) {
                 _movies.value = emptyList() // Se houver erro, seta a lista de filmes como vazia
+                Log.e("HomeViewModel", "Erro ao buscar filmes", e)
             } finally {
                 _loading.value = false
             }

@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeFitChallengeWeMovie"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1097394431047831~9908813091"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

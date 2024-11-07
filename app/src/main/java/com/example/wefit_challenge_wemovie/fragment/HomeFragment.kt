@@ -11,6 +11,7 @@
     import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModelFactory
     import com.example.wefit_challenge_wemovie.data.MovieRepository
     import androidx.fragment.app.viewModels
+    import androidx.recyclerview.widget.LinearLayoutManager
 
     class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -25,6 +26,13 @@
             setupObservers()
             binding.reloadButton.setOnClickListener {
                 homeViewModel.fetchMovies() // Chama a API quando clicar
+            }
+            movieAdapter = MovieAdapter { movie ->
+                homeViewModel.addToCart(movie)
+            }
+            binding.recyclerViewMovies.apply {
+                adapter = movieAdapter
+                layoutManager = LinearLayoutManager(requireContext())
             }
         }
 
