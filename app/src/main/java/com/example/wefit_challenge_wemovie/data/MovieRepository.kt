@@ -15,11 +15,16 @@ class MovieRepository {
 
     suspend fun getMovies(): List<Movie>? {
         return try {
+            Log.d("MovieRepository", "Chamando getMovies()")
+
             val response = service.getMovies()
+
+            Log.d("MovieRepository", "Resposta da API: $response")
+
             if (response.isSuccessful) {
-                val movies = response.body()
-                Log.d("MovieRepository", "Movies retrieved: $movies")
-                movies
+                val movieResponse = response.body()
+                Log.d("MovieRepository", "Movies retrieved: ${movieResponse?.products}")
+                movieResponse?.products // Retorna a lista de filmes
             } else {
                 Log.e("MovieRepository", "API call failed: ${response.code()} - ${response.errorBody()?.string()}")
                 null
@@ -27,6 +32,8 @@ class MovieRepository {
         } catch (e: Exception) {
             Log.e("MovieRepository", "Error fetching movies", e)
             null
+
         }
+
     }
 }

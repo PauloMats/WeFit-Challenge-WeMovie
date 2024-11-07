@@ -1,44 +1,44 @@
 package com.example.wefit_challenge_wemovie.ui
 
-import com.bumptech.glide.Glide
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wefit_challenge_wemovie.R
-import com.example.wefit_challenge_wemovie.databinding.ItemMovieBinding
+import com.bumptech.glide.Glide
+import com.example.wefit_challenge_wemovie.databinding.ItemMovieCardBinding
 import com.example.wefit_challenge_wemovie.models.Movie
 
-class MovieAdapter(private val onAddToCartClick: (Movie) -> Unit) :
-    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
+class MovieAdapter(private val onAddButtonClick: (Movie) -> Unit) :
+    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
+    private var movieList: List<Movie> = emptyList() // Use List<Filme>
+
+    class MovieViewHolder(val binding: ItemMovieCardBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemMovieCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
+        val filme = movieList[position] // Use a variável filme
+        holder.binding.movieTitle.text = filme.title // Acesse a propriedade title de Filme
 
-    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        Glide.with(holder.itemView.context)
+            .load(filme.image) // Acesse a propriedade image de Filme
+            .into(holder.binding.movieImage)
 
-        fun bind(movie: Movie) {
-            binding.movie = movie
-            Glide.with(binding.moviePoster.context)
-                .load(movie.image)
-                .placeholder(R.drawable.placeholder_image)
-                .into(binding.moviePoster)
-
-            binding.addToCartButton.setOnClickListener { onAddToCartClick(movie) }
-            binding.executePendingBindings()
+        holder.binding.addButton.setOnClickListener {
+            onAddButtonClick(filme) // Passe o objeto Filme para o listener
         }
+        Log.d("MovieAdapter", "onBindViewHolder chamado para posição $position")
+        Log.d("MovieAdapter", "Filme: ${movieList[position]}")
     }
 
-    class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem == newItem
+    override fun getItemCount(): Int = movieList.size
+
+    fun submitList(filmes: List<Movie>) { // Use filmes: List<Filme>
+        this.movieList = filmes
+        notifyDataSetChanged()
     }
 }

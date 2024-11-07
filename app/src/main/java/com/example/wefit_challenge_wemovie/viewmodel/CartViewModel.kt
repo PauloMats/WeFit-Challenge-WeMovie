@@ -1,5 +1,6 @@
 package com.example.wefit_challenge_wemovie.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +20,10 @@ class CartViewModel : ViewModel() {
     // Adiciona um filme ao carrinho
     fun addToCart(movie: Movie) {
         _cartItems.value?.add(movie)
-        calculateTotalPrice()
+        _cartItems.value = _cartItems.value
+
+        Log.d("SharedViewModel", "Filme adicionado: $movie")
+        Log.d("SharedViewModel", "Carrinho: ${_cartItems.value}")
     }
 
     // Remove um filme do carrinho
@@ -30,6 +34,6 @@ class CartViewModel : ViewModel() {
 
     // Calcula o valor total do carrinho
     private fun calculateTotalPrice() {
-        _totalPrice.value = _cartItems.value?.sumOf { it.price } ?: 0.0
+        _totalPrice.value = _cartItems.value?.sumOf { it.price * it.quantity } ?: 0.0
     }
 }

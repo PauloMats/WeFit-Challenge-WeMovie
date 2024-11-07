@@ -3,7 +3,6 @@ package com.example.wefit_challenge_wemovie
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
-import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {

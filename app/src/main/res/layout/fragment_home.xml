@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMovies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/loadingSpinner"
         android:layout_width="wrap_content"
@@ -16,11 +25,9 @@
 
 
         <TextView
-            android:id="@+id/emptyStateText"
-            android:layout_width="350dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_height="600dp"
+            android:id="@+id/emptyStateHomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/img_nada_aqui"
             android:visibility="visible" />
 
@@ -35,15 +42,8 @@
             android:backgroundTint="@color/blue"
             android:text="Recarregar página"
             android:textStyle="bold"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMovies"
-        android:layout_width="250dp"
-        android:layout_height="350dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="170dp"
-        android:layout_weight="0" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wefit_challenge_wemovie.databinding.ActivityHomeBinding
 import com.example.wefit_challenge_wemovie.fragment.HomeFragment
+import com.example.wefit_challenge_wemovie.ui.CartFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -11,17 +12,33 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        // Adicionar o HomeFragment ao FrameLayout
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer,
-        HomeFragment()
-        )
-        fragmentTransaction.commit()
+        // Selecionar o item "Home" na barra de navegação
+        binding.bottomNavigationView.selectedItemId = R.id.navigation_home
 
+        // Configurar os listeners da barra de navegação
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    supportFragmentManager.beginTransaction()
+
+                    .replace(R.id.fragmentContainer, HomeFragment())
+                        .commit()
+
+                    true
+                }
+                R.id.navigation_cart -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, CartFragment())
+                        .commit()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }
