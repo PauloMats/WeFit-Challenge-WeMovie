@@ -20,6 +20,15 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@{movie.title}"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_image" />
+
         <TextView
             android:id="@+id/moviePrice"
             android:layout_width="wrap_content"

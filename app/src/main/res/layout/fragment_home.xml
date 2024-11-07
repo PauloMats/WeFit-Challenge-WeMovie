@@ -12,9 +12,9 @@
 
     <TextView
         android:id="@+id/emptyStateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nada aqui"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="Ops nenhum filme foi encontrado"
         android:visibility="gone"/>
 
     <Button
@@ -25,9 +25,11 @@
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:id="@+id/recyclerViewMovies"
+        android:layout_width="250dp"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="170dp"
+        android:layout_weight="0"/>
 
 </LinearLayout>

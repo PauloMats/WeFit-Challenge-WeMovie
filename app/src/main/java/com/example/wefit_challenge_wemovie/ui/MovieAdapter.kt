@@ -1,10 +1,12 @@
 package com.example.wefit_challenge_wemovie.ui
 
+import com.bumptech.glide.Glide
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.databinding.ItemMovieBinding
 import com.example.wefit_challenge_wemovie.models.Movie
 
@@ -25,6 +27,11 @@ class MovieAdapter(private val onAddToCartClick: (Movie) -> Unit) :
 
         fun bind(movie: Movie) {
             binding.movie = movie
+            Glide.with(binding.moviePoster.context)
+                .load(movie.image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(binding.moviePoster)
+
             binding.addToCartButton.setOnClickListener { onAddToCartClick(movie) }
             binding.executePendingBindings()
         }

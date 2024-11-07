@@ -1,70 +1,90 @@
 package com.example.wefit_challenge_wemovie
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wefit_challenge_wemovie.databinding.ActivityHomeBinding
 import com.example.wefit_challenge_wemovie.models.Movie
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModel
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModelFactory
 import com.example.wefit_challenge_wemovie.data.MovieRepository
+import com.example.wefit_challenge_wemovie.databinding.FragmentHomeBinding
 import com.example.wefit_challenge_wemovie.ui.MovieAdapter
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : Fragment(R.layout.activity_home) {
 
-    private lateinit var binding: ActivityHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var movieAdapter: MovieAdapter
+    private val homeViewModel: HomeViewModel by viewModels { HomeViewModelFactory(MovieRepository()) }
 
-    // Instância de MovieRepository
-    private val repository by lazy { MovieRepository() }
 
-    // Instância de HomeViewModel usando o Factory
-    private val homeViewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository) }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Atribuindo o binding correto para o fragmento
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Retorne a raiz do layout do fragmento
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        observeViewModel()
+        setupObservers()
 
-        homeViewModel.fetchMovies() // Inicia a requisição dos filmes
+        // Chama a API para buscar os filmes
+        homeViewModel.fetchMovies()
     }
 
     private fun setupRecyclerView() {
         movieAdapter = MovieAdapter { movie -> addToCart(movie) }
-        binding.recyclerView.apply {
+        binding.recyclerViewMovies.apply {
             adapter = movieAdapter
-            layoutManager = LinearLayoutManager(this@HomeActivity)
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        // Botão para recarregar
+        binding.reloadButton.setOnClickListener {
+            homeViewModel.fetchMovies() // Chama novamente a API ao clicar
         }
     }
 
-    private fun observeViewModel() {
-        // Observa mudanças na lista de filmes
-        homeViewModel.movies.observe(this, Observer { movies ->
+    private fun setupObservers() {
+        homeViewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             if (movies.isNullOrEmpty()) {
-                binding.recyclerView.visibility = View.GONE
-                Toast.makeText(this, "No movies found", Toast.LENGTH_SHORT).show()
+                binding.recyclerViewMovies.visibility = View.GONE
+                binding.emptyStateText.visibility = View.VISIBLE // Torna o texto "Nenhum filme encontrado" visível
+                binding.reloadButton.visibility = View.VISIBLE // Torna o botão de recarregar visível
             } else {
-                binding.recyclerView.visibility = View.VISIBLE
+                binding.recyclerViewMovies.visibility = View.VISIBLE
+                binding.emptyStateText.visibility = View.GONE
+                binding.reloadButton.visibility = View.GONE
                 movieAdapter.submitList(movies)
             }
         })
 
-        // Observa o estado de carregamento
-        homeViewModel.loading.observe(this, Observer { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        homeViewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            binding.reloadButton.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
     }
 
     private fun addToCart(movie: Movie) {
-        Toast.makeText(this, "${movie.title} added to cart", Toast.LENGTH_SHORT).show()
-        // Implementar a lógica de adicionar ao carrinho
+        Toast.makeText(requireContext(), "${movie.title} adicionado ao Carrinho", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Liberando o binding quando a view é destruída
     }
 }
+

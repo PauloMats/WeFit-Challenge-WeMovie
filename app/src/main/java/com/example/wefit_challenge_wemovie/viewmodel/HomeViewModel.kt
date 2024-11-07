@@ -21,9 +21,9 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val movieList = repository.getMovies()  // Chama o `getMovies` do `MovieRepository`
-                _movies.value = movieList
+                _movies.value = (movieList)
             } catch (e: Exception) {
-                _movies.value = emptyList()  // ou tratamento de erro
+                _movies.value = emptyList() // Se houver erro, seta a lista de filmes como vazia
             } finally {
                 _loading.value = false
             }

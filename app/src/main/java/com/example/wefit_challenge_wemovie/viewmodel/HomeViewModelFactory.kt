@@ -3,7 +3,7 @@ package com.example.wefit_challenge_wemovie.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.wefit_challenge_wemovie.data.MovieRepository
-import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModel
+
 
 class HomeViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
