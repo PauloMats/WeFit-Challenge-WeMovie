@@ -19,6 +19,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentCartBinding.bind(view)
 
         adapter = MovieAdapter(sharedViewModel)

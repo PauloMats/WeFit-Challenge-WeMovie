@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.wefit_challenge_wemovie.databinding.ItemMovieCardBinding // Use o Binding do item da home
+import com.example.wefit_challenge_wemovie.databinding.ItemMovieCardBinding
 import com.example.wefit_challenge_wemovie.models.Movie
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 
@@ -24,15 +24,16 @@ class HomeAdapter(private val sharedViewModel: SharedViewModel) :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
-        holder.binding.movie = movie // Vincula o objeto Movie ao Binding
+        holder.binding.movie = movie
 
-        // Carrega a imagem do filme (se necessário)
         Glide.with(holder.itemView.context)
             .load(movie.image)
             .into(holder.binding.movieImage)
 
+        // Listener combinado para o botão
         holder.binding.addButton.setOnClickListener {
-            sharedViewModel.addToCart(movie)
+            holder.binding.clickHandler?.onCartButtonClick(movie) // Chama a função do clickHandler
+            sharedViewModel.addToCart(movie) // Adiciona o filme ao carrinho
             Log.d("HomeAdapter", "Adicionando filme ao carrinho: $movie")
         }
 

@@ -13,6 +13,7 @@ import com.example.wefit_challenge_wemovie.data.MovieRepository
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wefit_challenge_wemovie.adapter.HomeAdapter
+import com.example.wefit_challenge_wemovie.classes.MyClickHandler
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -27,6 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         setupObservers()
+
+       binding.clickHandler = MyClickHandler(sharedViewModel)
 
         binding.reloadButton.setOnClickListener {
             binding.loadingSpinner.visibility = View.VISIBLE

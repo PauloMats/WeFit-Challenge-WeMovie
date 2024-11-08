@@ -1,51 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMovies"
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.example.wefit_challenge_wemovie.classes.MyClickHandler"
+        />
+    </data>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="0"
-        android:visibility="gone" />
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/loadingSpinner"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="626dp">
-
-
-        <TextView
-            android:id="@+id/emptyStateHomeText"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMovies"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/loadingSpinner"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/img_nada_aqui"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
-        <Button
-            android:id="@+id/reloadButton"
-            android:layout_width="190dp"
-            android:layout_height="49dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="22dp"
-            android:layout_marginLeft="1dp"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="626dp">
 
-            android:backgroundTint="@color/blue"
-            android:text="Recarregar página"
-            android:textStyle="bold"
-            android:visibility="visible" />
-    </FrameLayout>
+            <TextView
+                android:id="@+id/emptyStateHomeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_nada_aqui"
+                android:visibility="visible" />
 
-
-</LinearLayout>
+            <Button
+                android:id="@+id/reloadButton"
+                android:layout_width="190dp"
+                android:layout_height="49dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="22dp"
+                android:layout_marginLeft="1dp"
+                android:backgroundTint="@color/blue"
+                android:text="Recarregar página"
+                android:textStyle="bold"
+                android:visibility="visible" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

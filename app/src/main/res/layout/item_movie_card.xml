@@ -7,6 +7,9 @@
         <variable
             name="movie"
             type="com.example.wefit_challenge_wemovie.models.Movie" />
+        <variable
+            name="clickHandler"
+            type="com.example.wefit_challenge_wemovie.classes.MyClickHandler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -61,8 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/blue"
-                android:text="🛒 Adicionar ao Carrinho" />
+                android:backgroundTint="@{clickHandler.isButtonPressed ? @color/green : @color/blue}"
+                android:text="🛒 Adicionar ao Carrinho"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
