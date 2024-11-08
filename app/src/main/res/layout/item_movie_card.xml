@@ -38,10 +38,12 @@
                 android:id="@+id/moviePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(movie.price)}"
+                android:text="@{@string/price_format(movie.price)}"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/movieTitle"

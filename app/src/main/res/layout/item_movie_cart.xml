@@ -102,7 +102,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:textStyle="bold"
-                android:text="@{@string/price_format(movie.price * movie.quantity)}"
+                android:text="@{@string/price_total(movie.price * movie.quantity)}"
                 android:textSize="16sp"
                 android:textColor="#000000"
                 android:paddingEnd="16dp" />
