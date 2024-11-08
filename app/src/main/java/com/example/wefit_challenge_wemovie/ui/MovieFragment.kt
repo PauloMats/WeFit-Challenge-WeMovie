@@ -17,10 +17,10 @@ import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 class MovieFragment : Fragment(R.layout.fragment_movie) {
 
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(MovieRepository()) // Use a factory aqui
+        HomeViewModelFactory(MovieRepository())
     }
 
-    private lateinit var binding: FragmentMovieBinding // Use o binding correto
+    private lateinit var binding: FragmentMovieBinding
     private lateinit var adapter: MovieAdapter
 
 

@@ -1,3 +1,4 @@
+// CartFragment
 package com.example.wefit_challenge_wemovie.ui
 
 import android.os.Bundle
@@ -16,22 +17,26 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var binding: FragmentCartBinding
     private lateinit var adapter: MovieAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCartBinding.bind(view)
 
         adapter = MovieAdapter(sharedViewModel)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerViewCart.adapter = adapter
 
         sharedViewModel.cartItems.observe(viewLifecycleOwner) { movies ->
-            Log.d("CartFragment", "Lista de filmes no carrinho: $movies")
-            adapter.submitList(movies)
-            binding.recyclerView.visibility = if (movies.isEmpty()) View.GONE else View.VISIBLE
+            try {
+                Log.d("CartFragment", "Lista de filmes no carrinho: $movies")
+                adapter.submitList(movies)
+                binding.recyclerViewCart.visibility = if (movies.isEmpty()) View.GONE else View.VISIBLE
 
-            // Calcula o preço total
-            val totalPrice = movies.sumOf { it.price * it.quantity }
-            binding.totalPrice.text = "Total: R$ ${"%.2f".format(totalPrice)}"
+                // Calcula o preço total
+                val totalPrice = movies.sumOf { it.price * it.quantity }
+                binding.totalPrice.text = "Total: R$ ${"%.2f".format(totalPrice)}"
+            } catch (e: Exception) {
+                Log.e("CartFragment", "Erro ao atualizar a lista de filmes", e)
+                // Tratar o erro, ex: exibir uma mensagem para o usuário
+            }
         }
 
         binding.finalizeOrderButton.setOnClickListener {
