@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wefit_challenge_wemovie.R
+import com.example.wefit_challenge_wemovie.adapter.MovieAdapter
 import com.example.wefit_challenge_wemovie.databinding.FragmentCartBinding
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 
@@ -39,10 +40,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 Log.e("CartFragment", "Erro ao atualizar a lista de filmes", e)
                 // Tratar o erro, ex: exibir uma mensagem para o usuário
             }
+            binding.finalizeOrderButton.setOnClickListener {
+                findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
+            }
         }
 
-        binding.finalizeOrderButton.setOnClickListener {
-            findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
-        }
     }
 }

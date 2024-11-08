@@ -1,15 +1,15 @@
 // MovieAdapter.kt
-package com.example.wefit_challenge_wemovie.ui
+package com.example.wefit_challenge_wemovie.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.wefit_challenge_wemovie.databinding.ItemMovieCartBinding // Use o Binding do item do carrinho
 import com.example.wefit_challenge_wemovie.models.Movie
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class MovieAdapter(private val sharedViewModel: SharedViewModel) :

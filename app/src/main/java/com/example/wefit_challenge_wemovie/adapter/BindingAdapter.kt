@@ -1,4 +1,4 @@
-package com.example.wefit_challenge_wemovie.ui
+package com.example.wefit_challenge_wemovie.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

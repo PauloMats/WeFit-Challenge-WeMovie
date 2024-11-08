@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@color/background"
-    app:cardCornerRadius="10dp"
-    tools:ignore="ExtraText">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="movie"
+            type="com.example.wefit_challenge_wemovie.models.Movie" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/background"
+        app:cardCornerRadius="10dp"
+        tools:ignore="ExtraText">
 
-        <ImageView
-            android:id="@+id/movieImage"
-            android:layout_width="200dp"
-            android:layout_height="294dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginBottom="60dp"
-            android:contentDescription="@{movie.image}"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/moviePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{movie.price}"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/movieTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{movie.title}"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/blue"
-            android:text="🛒 Adicionar ao Carrinho" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/movieImage"
+                android:layout_width="200dp"
+                android:layout_height="294dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginBottom="60dp"
+                android:contentDescription="@{movie.image}"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{movie.image}" />
 
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/moviePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(movie.price)}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{movie.title}"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/blue"
+                android:text="🛒 Adicionar ao Carrinho" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

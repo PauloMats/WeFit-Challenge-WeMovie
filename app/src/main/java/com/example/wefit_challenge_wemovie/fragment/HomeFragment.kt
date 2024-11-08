@@ -5,18 +5,19 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.wefit_challenge_wemovie.R
-import com.example.wefit_challenge_wemovie.ui.MovieAdapter
+import com.example.wefit_challenge_wemovie.adapter.MovieAdapter
 import com.example.wefit_challenge_wemovie.databinding.FragmentHomeBinding
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModel
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModelFactory
 import com.example.wefit_challenge_wemovie.data.MovieRepository
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wefit_challenge_wemovie.adapter.HomeAdapter
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var movieAdapter: HomeAdapter
     private lateinit var binding: FragmentHomeBinding
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by viewModels { HomeViewModelFactory(MovieRepository()) }
@@ -33,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding.emptyStateHomeText.visibility = View.GONE
             binding.reloadButton.visibility = View.GONE
         }
-        movieAdapter = MovieAdapter(sharedViewModel)
+        movieAdapter = HomeAdapter(sharedViewModel)
 
         binding.recyclerViewMovies.apply {
             adapter = movieAdapter
