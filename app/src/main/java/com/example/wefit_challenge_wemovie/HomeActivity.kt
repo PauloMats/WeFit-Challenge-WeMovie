@@ -8,6 +8,9 @@ import com.example.wefit_challenge_wemovie.ui.CartFragment
 
 class HomeActivity : AppCompatActivity() {
 
+    fun selectHomeMenuItem() {
+        binding.bottomNavigationView.selectedItemId = R.id.navigation_home
+    }
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

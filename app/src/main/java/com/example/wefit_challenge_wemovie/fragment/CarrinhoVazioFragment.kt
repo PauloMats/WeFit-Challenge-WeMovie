@@ -3,9 +3,10 @@ package com.example.wefit_challenge_wemovie.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.example.wefit_challenge_wemovie.HomeActivity
 import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.databinding.FragmentCarrinhoVazioBinding
+import com.example.wefit_challenge_wemovie.fragment.HomeFragment
 
 class CarrinhoVazioFragment : Fragment(R.layout.fragment_carrinho_vazio) {
 
@@ -16,7 +17,15 @@ class CarrinhoVazioFragment : Fragment(R.layout.fragment_carrinho_vazio) {
         binding = FragmentCarrinhoVazioBinding.bind(view)
 
         binding.btnBackToHome.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            (activity as? HomeActivity)?.selectHomeMenuItem() //Seleciona o item Home no BottomNavigationView
+
+            // Obtém o FragmentManager da Activity
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            // Substitui o Fragment atual pelo HomeFragment
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, HomeFragment()) // Substitui no fragmentContainer
+                .commit()
         }
     }
 }

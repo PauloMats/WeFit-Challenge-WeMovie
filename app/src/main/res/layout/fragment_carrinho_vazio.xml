@@ -12,26 +12,26 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
-
-    <!-- Mensagem de texto -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parece que não há nada por aqui :("
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="22sp"
+        android:layout_height="472dp"
         android:gravity="center"
-        android:paddingBottom="16dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Mensagem de texto -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="Parece que não há nada por aqui :("
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/womanImagePlaceholder"
-            android:layout_width="358dp"
-            android:layout_height="417dp"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:padding="8dp"
             android:src="@drawable/img_carrinho_vazio" />
