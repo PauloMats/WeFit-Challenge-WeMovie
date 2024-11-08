@@ -1,4 +1,3 @@
-// CartFragment.kt
 package com.example.wefit_challenge_wemovie.ui
 
 import android.os.Bundle
@@ -6,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.adapter.MovieAdapter
@@ -25,13 +23,47 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
         adapter = MovieAdapter(sharedViewModel)
         binding.recyclerViewCart.adapter = adapter
-        binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext()) // Define o LayoutManager
+        binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext())
 
         sharedViewModel.cartItems.observe(viewLifecycleOwner) { movies ->
             try {
                 Log.d("CartFragment", "Lista de filmes no carrinho: $movies")
-                adapter.submitList(movies)
-                binding.recyclerViewCart.visibility = if (movies.isEmpty()) View.GONE else View.VISIBLE
+
+                if (movies.isEmpty()) {
+                    // Exibe o CarrinhoVazioFragment
+                    childFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerCart, CarrinhoVazioFragment())
+                        .commit()
+
+                    // Oculta os elementos do carrinho
+                    binding.recyclerViewCart.visibility = View.GONE
+                    binding.totalLabel.visibility = View.GONE
+                    binding.totalPrice.visibility = View.GONE
+                    binding.finalizeOrderButton.visibility = View.GONE
+                } else {
+                    // Exibe o RecyclerView com os filmes
+                    childFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerCart, Fragment()) // Substitui por um Fragment vazio
+                        .commit()
+
+                    // Exibe os elementos do carrinho
+                    binding.recyclerViewCart.visibility = View.VISIBLE
+                    binding.totalLabel.visibility = View.VISIBLE
+                    binding.totalPrice.visibility = View.VISIBLE
+                    binding.finalizeOrderButton.visibility = View.VISIBLE
+
+                    adapter.submitList(movies)
+
+                    // Define o OnClickListener do botão "Finalizar Pedido"
+                    binding.finalizeOrderButton.setOnClickListener {
+                        sharedViewModel.clearCart() // Limpa o carrinho
+
+                        // Carrega o OrderConfirmationFragment no fragmentContainerCart
+                        childFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerCart, OrderConfirmationFragment())
+                            .commit()
+                    }
+                }
 
                 // Calcula o preço total
                 val totalPrice = movies.sumOf { it.price * it.quantity }
@@ -40,10 +72,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 Log.e("CartFragment", "Erro ao atualizar a lista de filmes", e)
                 // Tratar o erro, ex: exibir uma mensagem para o usuário
             }
-            binding.finalizeOrderButton.setOnClickListener {
-                findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
-            }
         }
-
     }
 }

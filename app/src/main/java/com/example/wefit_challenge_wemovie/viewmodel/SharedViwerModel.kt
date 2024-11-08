@@ -53,6 +53,19 @@ class SharedViewModel : ViewModel() {
         }
     }
 
+    fun clearCart() {
+        try {
+            _cartItems.value?.clear()
+            _cartItems.value = _cartItems.value // Notifica os observers
+            calculateTotalPrice()
+
+            Log.d("SharedViewModel", "Carrinho limpo")
+        } catch (e: Exception) {
+            Log.e("SharedViewModel", "Erro ao limpar o carrinho", e)
+            // Tratar o erro, ex: exibir uma mensagem para o usuário
+        }
+    }
+
     fun removeFromCart(movie: Movie) {
         try {
             _cartItems.value?.remove(movie)

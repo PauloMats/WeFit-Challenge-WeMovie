@@ -20,7 +20,7 @@
         android:label="Carrinho" />
 
     <fragment
-        android:id="@+id/orderConfirmationFragment"
+    android:id="@+id/orderConfirmationFragment"
         android:name="com.example.wefit_challenge_wemovie.ui.OrderConfirmationFragment"
         android:label="Compra Realizada" />
 </navigation>

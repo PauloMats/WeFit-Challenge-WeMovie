@@ -1,22 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="@color/background">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF">
 
-
+    <!-- Data e hora da compra -->
     <TextView
-        android:id="@+id/confirmationMessage"
+        android:id="@+id/purchaseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-    android:text="Compra realizada com sucesso!"/>
+        android:text="Compra realizada em 14/06/2024 às 15:12"
+        android:textColor="#A0A0A0"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:paddingBottom="8dp"/>
 
-    <Button
+    <!-- Mensagem de sucesso -->
+    <TextView
+        android:id="@+id/successMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    android:id="@+id/backToHomeButton"
-    android:text="Voltar para Início"/>
-        </LinearLayout>
+        android:text="Compra realizada com sucesso!"
+        android:textColor="#2E2B3E"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <!-- Placeholder para a imagem do homem -->
+    <ImageView
+        android:id="@+id/manImagePlaceholder"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:contentDescription="Imagem de confirmação"
+        android:src="@drawable/img_compra_realizada"
+        android:padding="8dp"/>
+
+    <!-- Botão para Voltar à Home -->
+    <Button
+        android:id="@+id/backToHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Voltar à Home"
+        android:backgroundTint="#00AEEF"
+        android:textColor="#FFFFFF"
+        android:padding="10dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

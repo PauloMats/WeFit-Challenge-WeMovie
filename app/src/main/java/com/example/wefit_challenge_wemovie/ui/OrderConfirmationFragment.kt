@@ -1,12 +1,11 @@
 package com.example.wefit_challenge_wemovie.ui
 
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.databinding.FragmentOrderConfirmationBinding
-
+import com.example.wefit_challenge_wemovie.fragment.HomeFragment
 
 class OrderConfirmationFragment : Fragment(R.layout.fragment_order_confirmation) {
 
@@ -17,7 +16,13 @@ class OrderConfirmationFragment : Fragment(R.layout.fragment_order_confirmation)
         binding = FragmentOrderConfirmationBinding.bind(view)
 
         binding.backToHomeButton.setOnClickListener {
-            findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
+            // Obtém o FragmentManager da Activity
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            // Substitui o Fragment atual pelo HomeFragment
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, HomeFragment()) // Substitui no fragmentContainer
+                .commit()
         }
     }
 }
