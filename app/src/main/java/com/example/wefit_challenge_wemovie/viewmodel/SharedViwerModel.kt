@@ -21,6 +21,24 @@ class SharedViewModel : ViewModel() {
         _totalPrice.value = _cartItems.value?.sumOf { it.price * it.quantity } ?: 0.0
     }
 
+    fun updateCartItem(movie: Movie) {
+        try {
+            // Encontra o filme na lista do carrinho
+            val index = _cartItems.value?.indexOfFirst { it.id == movie.id } ?: -1
+            if (index != -1) {
+                // Atualiza a quantidade do filme
+                _cartItems.value?.get(index)?.quantity = movie.quantity
+                _cartItems.value = _cartItems.value // Notifica os observers
+                calculateTotalPrice()
+
+                Log.d("SharedViewModel", "Item atualizado no carrinho: $movie")
+                Log.d("SharedViewModel", "Carrinho: ${_cartItems.value}")
+            }
+        } catch (e: Exception) {
+            Log.e("SharedViewModel", "Erro ao atualizar item no carrinho", e)
+            // Tratar o erro, ex: exibir uma mensagem para o usuário
+        }
+    }
     fun addToCart(movie: Movie) {
         try {
             _cartItems.value?.add(movie)

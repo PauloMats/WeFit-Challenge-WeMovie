@@ -1,4 +1,4 @@
-// CartFragment
+// CartFragment.kt
 package com.example.wefit_challenge_wemovie.ui
 
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.databinding.FragmentCartBinding
 import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
@@ -23,6 +24,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
         adapter = MovieAdapter(sharedViewModel)
         binding.recyclerViewCart.adapter = adapter
+        binding.recyclerViewCart.layoutManager = LinearLayoutManager(requireContext()) // Define o LayoutManager
 
         sharedViewModel.cartItems.observe(viewLifecycleOwner) { movies ->
             try {
@@ -39,7 +41,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
         }
 
-        binding.finalizeOrderButton.setOnClickListener{
+        binding.finalizeOrderButton.setOnClickListener {
             findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
         }
     }
