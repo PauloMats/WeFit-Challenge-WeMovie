@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.wefit_challenge_wemovie.databinding.ItemMovieCardBinding
 import com.example.wefit_challenge_wemovie.models.Movie
+import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
 
-class MovieAdapter(private val onAddButtonClick: (Movie) -> Unit) :
+class MovieAdapter(private val sharedViewModel: SharedViewModel) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var movieList: List<Movie> = emptyList() // Use List<Filme>
@@ -29,7 +30,8 @@ class MovieAdapter(private val onAddButtonClick: (Movie) -> Unit) :
             .into(holder.binding.movieImage)
 
         holder.binding.addButton.setOnClickListener {
-            onAddButtonClick(filme) // Passe o objeto Filme para o listener
+            sharedViewModel.addToCart(filme)  // Passa o objeto Filme para o listener
+            Log.d("MovieAdapter", "Adicionando filme ao carrinho: $filme")
         }
         Log.d("MovieAdapter", "onBindViewHolder chamado para posição $position")
         Log.d("MovieAdapter", "Filme: ${movieList[position]}")

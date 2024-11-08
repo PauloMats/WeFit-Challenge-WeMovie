@@ -4,12 +4,15 @@ package com.example.wefit_challenge_wemovie.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.wefit_challenge_wemovie.R
 import com.example.wefit_challenge_wemovie.data.MovieRepository
 import com.example.wefit_challenge_wemovie.databinding.FragmentMovieBinding
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModel
 import com.example.wefit_challenge_wemovie.viewmodel.HomeViewModelFactory
+import com.example.wefit_challenge_wemovie.viewmodel.SharedViewModel
+
 
 class MovieFragment : Fragment(R.layout.fragment_movie) {
 
@@ -25,10 +28,8 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMovieBinding.bind(view)
 
-        // Inicializa o adapter
-        adapter = MovieAdapter { movie ->
-            viewModel.addToCart(movie)
-        }
+        val sharedViewModel: SharedViewModel by activityViewModels()
+        adapter = MovieAdapter(sharedViewModel)
 
         // Atribui o adapter ao RecyclerView
         binding.recyclerViewMoviesFragment.adapter = adapter

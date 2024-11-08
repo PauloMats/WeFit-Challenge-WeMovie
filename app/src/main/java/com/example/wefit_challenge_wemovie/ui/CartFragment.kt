@@ -1,6 +1,7 @@
 package com.example.wefit_challenge_wemovie.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,14 +16,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var binding: FragmentCartBinding
     private lateinit var adapter: MovieAdapter
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCartBinding.bind(view)
 
-        adapter = MovieAdapter(sharedViewModel::removeFromCart)
+        adapter = MovieAdapter(sharedViewModel)
         binding.recyclerView.adapter = adapter
 
         sharedViewModel.cartItems.observe(viewLifecycleOwner) { movies ->
+            Log.d("CartFragment", "Lista de filmes no carrinho: $movies")
             adapter.submitList(movies)
             binding.recyclerView.visibility = if (movies.isEmpty()) View.GONE else View.VISIBLE
 
