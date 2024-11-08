@@ -20,6 +20,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.bottomNavigationView.selectedItemId = R.id.navigation_home
+
         // Configurar os listeners da barra de navegação
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
