@@ -26,8 +26,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         setupObservers()
+
         binding.reloadButton.setOnClickListener {
+            binding.loadingSpinner.visibility = View.VISIBLE
             homeViewModel.fetchMovies()
+            binding.emptyStateHomeText.visibility = View.GONE
+            binding.reloadButton.visibility = View.GONE
         }
         movieAdapter = MovieAdapter(sharedViewModel)
 
@@ -44,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieAdapter.submitList(it ?: emptyList())
 
             val hasMovies = it?.isNotEmpty() == true
+            binding.loadingSpinner.visibility = View.GONE
             binding.recyclerViewMovies.visibility = if (hasMovies) View.VISIBLE else View.GONE
             binding.emptyStateHomeText.visibility = if (hasMovies) View.GONE else View.VISIBLE
             binding.reloadButton.visibility = if (hasMovies) View.GONE else View.VISIBLE

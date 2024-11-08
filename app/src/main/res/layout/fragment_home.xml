@@ -42,7 +42,7 @@
             android:backgroundTint="@color/blue"
             android:text="Recarregar página"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </FrameLayout>
 
 

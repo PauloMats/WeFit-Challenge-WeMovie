@@ -39,7 +39,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
         }
 
-        binding.finalizeOrderButton.setOnClickListener {
+        binding.finalizeOrderButton.setOnClickListener{
             findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
         }
     }

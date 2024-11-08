@@ -13,22 +13,20 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, HomeFragment())
+            .commit()
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        // Selecionar o item "Home" na barra de navegação
-        binding.bottomNavigationView.selectedItemId = R.id.navigation_home
 
         // Configurar os listeners da barra de navegação
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
                     supportFragmentManager.beginTransaction()
-
-                    .replace(R.id.fragmentContainer, HomeFragment())
+                        .replace(R.id.fragmentContainer, HomeFragment())
                         .commit()
-
                     true
                 }
                 R.id.navigation_cart -> {
