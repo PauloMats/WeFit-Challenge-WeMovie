@@ -1,3 +1,5 @@
+*Em Breve vídeo demostrando as funcionalidades do aplicativo, requisição da api, card com os filmes, card do carrinho e etc* 
+
 # WeMovie - Desafio WeFit
 
 Aplicativo mobile de e-commerce simplificado desenvolvido para o desafio de estruturação de projeto nativo Android da WeFit. Este app foi construído com a estrutura MVVM, utilizando Kotlin como linguagem principal, e se conecta a uma API para exibir uma lista de filmes, permitindo que o usuário adicione itens ao carrinho e finalize a compra.
