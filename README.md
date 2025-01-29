@@ -3,7 +3,11 @@
 Este projeto é um aplicativo mobile de e-commerce simplificado desenvolvido para o desafio de estruturação de projeto nativo Android da WeFit. O aplicativo foi construído utilizando a arquitetura MVVM (Model-View-ViewModel), com Kotlin como linguagem de programação principal. Ele se conecta a uma API para exibir uma lista de filmes, permitindo que o usuário adicione itens ao carrinho e finalize a compra.
 
 ## Demonstração
-Em breve, vídeo demonstrando as funcionalidades do aplicativo, requisição da API, card com os filmes, card do carrinho e etc.
+https://github.com/user-attachments/assets/66c48f6f-ecfc-446b-b146-355420887a04
+
+## Screenshots 
+<img width="375" alt="WeMovie" src="https://github.com/user-attachments/assets/cecacdbd-ddb9-4986-abca-07ad102633e4" />
+
 
 ## Índice
 - [Sobre o Desafio](#sobre-o-desafio)
